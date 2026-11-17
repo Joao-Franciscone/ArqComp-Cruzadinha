@@ -8,6 +8,78 @@
     <title>Cruzadinha Arquitetura Computacional</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Cruzadinha — Arquitetura Computacional</h1>
+        <p id="intro">Leia as pistas e preencha a cruzadinha. Selecione uma célula e digite a letra.</p>
+    </header>
+
+    <!-- Grid da cruzadinha -->
+    <main>
+        <section class="crossword-area">
+            <div class="crossword-grid" aria-label="Grade da cruzadinha" role="grid">
+                <!-- Exemplo de 5x5 com algumas células bloqueadas -->
+                <!-- Cada célula usa data-row, data-col e data-word-id (vazio se bloqueada) -->
+                <!-- Comentários: data-word-id referencia a id da pista; JS futuro usará selectCell/inputLetter -->
+                <!-- Linha 1 -->
+                <div class="cell" data-row="1" data-col="1" data-word-id="h1" role="gridcell" aria-label="Linha 1 Coluna 1"></div>
+                <div class="cell" data-row="1" data-col="2" data-word-id="h1" role="gridcell" aria-label="Linha 1 Coluna 2"></div>
+                <div class="cell cell--blocked" data-row="1" data-col="3" data-word-id="" role="presentation" aria-hidden="true"></div>
+                <div class="cell" data-row="1" data-col="4" data-word-id="h2" role="gridcell" aria-label="Linha 1 Coluna 4"></div>
+                <div class="cell" data-row="1" data-col="5" data-word-id="h2" role="gridcell" aria-label="Linha 1 Coluna 5"></div>
+                <!-- Linha 2 -->
+                <div class="cell" data-row="2" data-col="1" data-word-id="v1" role="gridcell" aria-label="Linha 2 Coluna 1"></div>
+                <div class="cell cell--blocked" data-row="2" data-col="2" data-word-id="" role="presentation" aria-hidden="true"></div>
+                <div class="cell" data-row="2" data-col="3" data-word-id="v2" role="gridcell" aria-label="Linha 2 Coluna 3"></div>
+                <div class="cell" data-row="2" data-col="4" data-word-id="v2" role="gridcell" aria-label="Linha 2 Coluna 4"></div>
+                <div class="cell" data-row="2" data-col="5" data-word-id="h2" role="gridcell" aria-label="Linha 2 Coluna 5"></div>
+                <!-- Linha 3 -->
+                <div class="cell" data-row="3" data-col="1" data-word-id="v1" role="gridcell" aria-label="Linha 3 Coluna 1"></div>
+                <div class="cell" data-row="3" data-col="2" data-word-id="v1" role="gridcell" aria-label="Linha 3 Coluna 2"></div>
+                <div class="cell" data-row="3" data-col="3" data-word-id="" role="presentation" aria-hidden="true"></div>
+                <div class="cell" data-row="3" data-col="4" data-word-id="v3" role="gridcell" aria-label="Linha 3 Coluna 4"></div>
+                <div class="cell" data-row="3" data-col="5" data-word-id="v3" role="gridcell" aria-label="Linha 3 Coluna 5"></div>
+                <!-- Linha 4 -->
+                <div class="cell cell--blocked" data-row="4" data-col="1" data-word-id="" role="presentation" aria-hidden="true"></div>
+                <div class="cell" data-row="4" data-col="2" data-word-id="h3" role="gridcell" aria-label="Linha 4 Coluna 2"></div>
+                <div class="cell" data-row="4" data-col="3" data-word-id="h3" role="gridcell" aria-label="Linha 4 Coluna 3"></div>
+                <div class="cell" data-row="4" data-col="4" data-word-id="h3" role="gridcell" aria-label="Linha 4 Coluna 4"></div>
+                <div class="cell cell--blocked" data-row="4" data-col="5" data-word-id="" role="presentation" aria-hidden="true"></div>
+                <!-- Linha 5 -->
+                <div class="cell" data-row="5" data-col="1" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 1"></div>
+                <div class="cell" data-row="5" data-col="2" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 2"></div>
+                <div class="cell" data-row="5" data-col="3" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 3"></div>
+                <div class="cell" data-row="5" data-col="4" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 4"></div>
+                <div class="cell" data-row="5" data-col="5" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 5"></div>
+            </div>
+
+            <!-- Controles -->
+            <div class="controls">
+                <button id="check-btn" type="button">Conferir</button>
+                <button id="reset-btn" type="button">Reiniciar</button>
+                <div id="score">Acertos: <span id="score-value">0</span></div>
+            </div>
+        </section>
+
+        <!-- Pistas: horizontais e verticais -->
+        <aside class="pistas">
+            <section class="pistas-horiz">
+                <h2>Horizontais</h2>
+                <ul>
+                    <li id="h1"><strong>1.</strong> Dica horizontal 1</li>
+                    <li id="h2"><strong>2.</strong> Dica horizontal 2</li>
+                    <li id="h3"><strong>3.</strong> Dica horizontal 3</li>
+                </ul>
+            </section>
+            <section class="pistas-vert">
+                <h2>Verticais</h2>
+                <ul>
+                    <li id="v1"><strong>1.</strong> Dica vertical 1</li>
+                    <li id="v2"><strong>2.</strong> Dica vertical 2</li>
+                    <li id="v3"><strong>3.</strong> Dica vertical 3</li>
+                    <li id="v4"><strong>4.</strong> Dica vertical 4</li>
+                </ul>
+            </section>
+        </aside>
+    </main>
 </body>
 </html>
