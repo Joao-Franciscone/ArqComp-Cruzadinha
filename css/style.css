@@ -1,0 +1,34 @@
+/* Reset básico */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;line-height:1.4;padding:16px;background:#f7f7f7;color:#222}
+
+.crossword-area{display:flex;gap:24px;flex-wrap:wrap}
+.crossword-grid{display:grid;grid-template-columns:repeat(5,48px);grid-auto-rows:48px;gap:4px;background:transparent}
+.cell{width:48px;height:48px;border:2px solid #444;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;text-transform:uppercase}
+.cell--blocked{background:#222;border-color:#222}
+
+/* Estados visuais */
+.cell--active{outline:3px solid #2a9df4}
+.cell--correct{background:#d4f0d8;border-color:#2e7d32}
+.cell--wrong{background:#f8d7da;border-color:#c62828}
+
+.controls{margin-top:12px;display:flex;gap:12px;align-items:center}
+button{padding:8px 12px;border-radius:4px;border:1px solid #333;background:#fff;cursor:pointer}
+#score{font-weight:600}
+
+.pistas{max-width:360px}
+.pistas h2{margin-bottom:8px}
+.pistas ul{list-style:none;padding-left:0}
+.pistas li{padding:6px 0;border-bottom:1px dashed #ddd}
+
+/* Responsividade */
+@media (max-width:600px){
+  .crossword-area{flex-direction:column;align-items:center}
+  .crossword-grid{transform:scale(0.9)}
+}
+
+/* Documentação rápida das hooks para JS
+   - Cada célula tem data-row, data-col e data-word-id
+   - Classes usadas: cell--active, cell--correct, cell--wrong, cell--blocked
+   - Eventos esperados pelo JS: selectCell (element), inputLetter (char), checkAnswers(), reset()
+*/
