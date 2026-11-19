@@ -17,39 +17,112 @@
     <main>
         <section class="crossword-area">
             <div class="crossword-grid" aria-label="Grade da cruzadinha" role="grid">
-                <!-- Exemplo de 5x5 com algumas células bloqueadas -->
-                <!-- Cada célula usa data-row, data-col e data-word-id (vazio se bloqueada) -->
-                <!-- Comentários: data-word-id referencia a id da pista; JS futuro usará selectCell/inputLetter -->
-                <!-- Linha 1 -->
-                <div class="cell" data-row="1" data-col="1" data-word-id="h1" role="gridcell" aria-label="Linha 1 Coluna 1"></div>
-                <div class="cell" data-row="1" data-col="2" data-word-id="h1" role="gridcell" aria-label="Linha 1 Coluna 2"></div>
-                <div class="cell cell--blocked" data-row="1" data-col="3" data-word-id="" role="presentation" aria-hidden="true"></div>
-                <div class="cell" data-row="1" data-col="4" data-word-id="h2" role="gridcell" aria-label="Linha 1 Coluna 4"></div>
-                <div class="cell" data-row="1" data-col="5" data-word-id="h2" role="gridcell" aria-label="Linha 1 Coluna 5"></div>
-                <!-- Linha 2 -->
-                <div class="cell" data-row="2" data-col="1" data-word-id="v1" role="gridcell" aria-label="Linha 2 Coluna 1"></div>
-                <div class="cell cell--blocked" data-row="2" data-col="2" data-word-id="" role="presentation" aria-hidden="true"></div>
-                <div class="cell" data-row="2" data-col="3" data-word-id="v2" role="gridcell" aria-label="Linha 2 Coluna 3"></div>
-                <div class="cell" data-row="2" data-col="4" data-word-id="v2" role="gridcell" aria-label="Linha 2 Coluna 4"></div>
-                <div class="cell" data-row="2" data-col="5" data-word-id="h2" role="gridcell" aria-label="Linha 2 Coluna 5"></div>
-                <!-- Linha 3 -->
-                <div class="cell" data-row="3" data-col="1" data-word-id="v1" role="gridcell" aria-label="Linha 3 Coluna 1"></div>
-                <div class="cell" data-row="3" data-col="2" data-word-id="v1" role="gridcell" aria-label="Linha 3 Coluna 2"></div>
-                <div class="cell" data-row="3" data-col="3" data-word-id="" role="presentation" aria-hidden="true"></div>
-                <div class="cell" data-row="3" data-col="4" data-word-id="v3" role="gridcell" aria-label="Linha 3 Coluna 4"></div>
-                <div class="cell" data-row="3" data-col="5" data-word-id="v3" role="gridcell" aria-label="Linha 3 Coluna 5"></div>
-                <!-- Linha 4 -->
-                <div class="cell cell--blocked" data-row="4" data-col="1" data-word-id="" role="presentation" aria-hidden="true"></div>
-                <div class="cell" data-row="4" data-col="2" data-word-id="h3" role="gridcell" aria-label="Linha 4 Coluna 2"></div>
-                <div class="cell" data-row="4" data-col="3" data-word-id="h3" role="gridcell" aria-label="Linha 4 Coluna 3"></div>
-                <div class="cell" data-row="4" data-col="4" data-word-id="h3" role="gridcell" aria-label="Linha 4 Coluna 4"></div>
-                <div class="cell cell--blocked" data-row="4" data-col="5" data-word-id="" role="presentation" aria-hidden="true"></div>
-                <!-- Linha 5 -->
-                <div class="cell" data-row="5" data-col="1" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 1"></div>
-                <div class="cell" data-row="5" data-col="2" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 2"></div>
-                <div class="cell" data-row="5" data-col="3" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 3"></div>
-                <div class="cell" data-row="5" data-col="4" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 4"></div>
-                <div class="cell" data-row="5" data-col="5" data-word-id="v4" role="gridcell" aria-label="Linha 5 Coluna 5"></div>
+                <!-- Grid baseado na imagem: dimensão 20x20 -->
+                <!-- MEMORIADEMASSA horizontal at row 2, col 3..16 -->
+                <!-- MICROCONTROLADOR horizontal at row 4, col 1..17 -->
+                <!-- REGISTRADORES vertical crossing MICROCONTROLADOR -->
+                <!-- RAM vertical crossing MEMORIADEMASSA/MICROCONTROLADOR area -->
+                <!-- UC/CPU/ULA cluster bottom-left -->
+
+                <!-- Row 1 unused for spacing -->
+                <!-- MEMORIADEMASSA -->
+                <div class="cell" style="grid-row:2;grid-column:3">M</div>
+                <div class="cell" style="grid-row:2;grid-column:4">E</div>
+                <div class="cell" style="grid-row:2;grid-column:5">M</div>
+                <div class="cell" style="grid-row:2;grid-column:6">O</div>
+                <div class="cell" style="grid-row:2;grid-column:7">R</div>
+                <div class="cell" style="grid-row:2;grid-column:8">I</div>
+                <div class="cell" style="grid-row:2;grid-column:9">A</div>
+                <div class="cell" style="grid-row:2;grid-column:10">D</div>
+                <div class="cell" style="grid-row:2;grid-column:11">E</div>
+                <div class="cell" style="grid-row:2;grid-column:12">M</div>
+                <div class="cell" style="grid-row:2;grid-column:13">A</div>
+                <div class="cell" style="grid-row:2;grid-column:14">S</div>
+                <div class="cell" style="grid-row:2;grid-column:15">S</div>
+                <div class="cell" style="grid-row:2;grid-column:16">A</div>
+
+                <!-- MICROCONTROLADOR -->
+                <div class="cell" style="grid-row:4;grid-column:1">M</div>
+                <div class="cell" style="grid-row:4;grid-column:2">I</div>
+                <div class="cell" style="grid-row:4;grid-column:3">C</div>
+                <div class="cell" style="grid-row:4;grid-column:4">R</div>
+                <div class="cell" style="grid-row:4;grid-column:5">O</div>
+                <div class="cell" style="grid-row:4;grid-column:6">C</div>
+                <div class="cell" style="grid-row:4;grid-column:7">O</div>
+                <div class="cell" style="grid-row:4;grid-column:8">N</div>
+                <div class="cell" style="grid-row:4;grid-column:9">T</div>
+                <div class="cell" style="grid-row:4;grid-column:10">R</div>
+                <div class="cell" style="grid-row:4;grid-column:11">O</div>
+                <div class="cell" style="grid-row:4;grid-column:12">L</div>
+                <div class="cell" style="grid-row:4;grid-column:13">A</div>
+                <div class="cell" style="grid-row:4;grid-column:14">D</div>
+                <div class="cell" style="grid-row:4;grid-column:15">O</div>
+
+                <!-- REGISTRADORES vertical starting at row5 col15 downward -->
+                <div class="cell" style="grid-row:5;grid-column:15">R</div>
+                <div class="cell" style="grid-row:6;grid-column:15">E</div>
+                <div class="cell" style="grid-row:7;grid-column:15">G</div>
+                <div class="cell" style="grid-row:8;grid-column:15">I</div>
+                <div class="cell" style="grid-row:9;grid-column:15">S</div>
+                <div class="cell" style="grid-row:10;grid-column:15">T</div>
+                <div class="cell" style="grid-row:11;grid-column:15">R</div>
+                <div class="cell" style="grid-row:12;grid-column:15">A</div>
+                <div class="cell" style="grid-row:13;grid-column:15">D</div>
+                <div class="cell" style="grid-row:14;grid-column:15">O</div>
+                <div class="cell" style="grid-row:15;grid-column:15">R</div>
+                <div class="cell" style="grid-row:16;grid-column:15">E</div>
+                <div class="cell" style="grid-row:17;grid-column:15">S</div>
+
+                <!-- RAM vertical crossing MICROCONTROLADOR at row4 col5? Place RAM starting row4 col13? Adjust per image: place RAM vertical at col13 rows 4..6 -->
+                <div class="cell" style="grid-row:6;grid-column:13">R</div>
+                <div class="cell" style="grid-row:7;grid-column:13">A</div>
+                <div class="cell" style="grid-row:8;grid-column:13">M</div>
+
+                <!-- DMA vertical near MEMORIADEMASSA: place at col12 rows 3..5 to intersect MEM[3]--> 
+                <div class="cell" style="grid-row:3;grid-column:12">D</div>
+                <div class="cell" style="grid-row:4;grid-column:12">M</div>
+                <div class="cell" style="grid-row:5;grid-column:12">A</div>
+
+                <!-- FLASH vertical under end of MEMORIADEMASSA: place col16 rows4..8 -->
+                <div class="cell" style="grid-row:3;grid-column:16">F</div>
+                <div class="cell" style="grid-row:4;grid-column:16">L</div>
+                <div class="cell" style="grid-row:5;grid-column:16">A</div>
+                <div class="cell" style="grid-row:6;grid-column:16">S</div>
+                <div class="cell" style="grid-row:7;grid-column:16">H</div>
+
+                <!-- CACHE horizontal lower area row12 col9..13 -->
+                <div class="cell" style="grid-row:12;grid-column:9">C</div>
+                <div class="cell" style="grid-row:12;grid-column:10">A</div>
+                <div class="cell" style="grid-row:12;grid-column:11">C</div>
+                <div class="cell" style="grid-row:12;grid-column:12">H</div>
+                <div class="cell" style="grid-row:12;grid-column:13">E</div>
+
+                <!-- EEPROM horizontal row13 col11..15 -> E E P R O -->
+                <div class="cell" style="grid-row:13;grid-column:11">E</div>
+                <div class="cell" style="grid-row:13;grid-column:12">E</div>
+                <div class="cell" style="grid-row:13;grid-column:13">P</div>
+                <div class="cell" style="grid-row:13;grid-column:14">R</div>
+                <div class="cell" style="grid-row:13;grid-column:15">O</div>
+
+                <!-- ROM horizontal row13 col14..16 overlapping EEPROM R at col14 -->
+                <div class="cell" style="grid-row:13;grid-column:14">R</div>
+                <div class="cell" style="grid-row:13;grid-column:15">O</div>
+                <div class="cell" style="grid-row:13;grid-column:16">M</div>
+
+                <!-- UC/CPU/ULA cluster bottom-left -->
+                <div class="cell" style="grid-row:15;grid-column:3">U</div>
+                <div class="cell" style="grid-row:15;grid-column:4">C</div>
+                <div class="cell" style="grid-row:14;grid-column:4">P</div>
+                <div class="cell" style="grid-row:15;grid-column:5">U</div>
+
+                <div class="cell" style="grid-row:16;grid-column:4">U</div>
+                <div class="cell" style="grid-row:16;grid-column:5">L</div>
+                <div class="cell" style="grid-row:17;grid-column:5">A</div>
+
+                <!-- small CACHE connection letters under ULA -->
+                <div class="cell" style="grid-row:17;grid-column:4">C</div>
+                <div class="cell" style="grid-row:17;grid-column:6">H</div>
+
             </div>
 
             <!-- Controles -->
