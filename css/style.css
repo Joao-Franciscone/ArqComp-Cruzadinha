@@ -1,34 +1,338 @@
-/* Reset básico */
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;line-height:1.4;padding:16px;background:#f7f7f7;color:#222}
-
-.crossword-area{display:flex;gap:24px;flex-wrap:wrap}
-.crossword-grid{display:grid;grid-template-columns:repeat(20,40px);grid-auto-rows:40px;gap:6px;background:transparent}
-.cell{width:40px;height:40px;border:2px solid #444;background:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;text-transform:uppercase}
-.cell--blocked{background:#222;border-color:#222}
-
-/* Estados visuais */
-.cell--active{outline:3px solid #2a9df4}
-.cell--correct{background:#d4f0d8;border-color:#2e7d32}
-.cell--wrong{background:#f8d7da;border-color:#c62828}
-
-.controls{margin-top:12px;display:flex;gap:12px;align-items:center}
-button{padding:8px 12px;border-radius:4px;border:1px solid #333;background:#fff;cursor:pointer}
-#score{font-weight:600}
-
-.pistas{max-width:360px}
-.pistas h2{margin-bottom:8px}
-.pistas ul{list-style:none;padding-left:0}
-.pistas li{padding:6px 0;border-bottom:1px dashed #ddd}
-
-/* Responsividade */
-@media (max-width:600px){
-  .crossword-area{flex-direction:column;align-items:center}
-  .crossword-grid{transform:scale(0.9)}
+:root {
+    --bg-page: #f1f5f9;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --border-subtle: #e2e8f0;
+    --cell-border: #334155;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-soft: #dbeafe;
+    --word-highlight: #eff6ff;
+    --correct-bg: #dcfce7;
+    --correct-border: #16a34a;
+    --correct-text: #14532d;
+    --wrong-bg: #fee2e2;
+    --wrong-border: #dc2626;
+    --wrong-text: #7f1d1d;
+    --radius-md: 12px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 4px 16px rgba(15, 23, 42, 0.06);
 }
 
-/* Documentação rápida das hooks para JS
-   - Cada célula tem data-row, data-col e data-word-id
-   - Classes usadas: cell--active, cell--correct, cell--wrong, cell--blocked
-   - Eventos esperados pelo JS: selectCell (element), inputLetter (char), checkAnswers(), reset()
-*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 24px;
+}
+
+/* Cabeçalho */
+.header {
+    max-width: 1320px;
+    margin: 0 auto 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px 28px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.header__badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    background: var(--primary-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+}
+
+.header__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.header__subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.scoreboard {
+    background: var(--bg-page);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 12px 20px;
+    text-align: right;
+}
+
+.scoreboard__label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.scoreboard__value {
+    font-size: 22px;
+    color: var(--primary);
+}
+
+/* Layout Principal */
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    align-items: start;
+}
+
+.board-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.crossword-wrapper {
+    overflow-x: auto;
+    padding: 8px 4px 16px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Grade 21 colunas x 19 linhas */
+.crossword-grid {
+    display: grid;
+    grid-template-columns: repeat(21, 36px);
+    grid-template-rows: repeat(19, 36px);
+    gap: 3px;
+}
+
+.cell {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--cell-border);
+    border-radius: 4px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.cell:hover {
+    border-color: var(--primary);
+}
+
+.cell:focus {
+    outline: none;
+}
+
+.cell .numero {
+    position: absolute;
+    top: 1px;
+    left: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-muted);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.cell .letra {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* Estados visuais da célula */
+.cell--word-active {
+    background-color: var(--word-highlight);
+    border-color: #93c5fd;
+}
+
+.cell--active {
+    background-color: var(--primary-soft) !important;
+    border: 2px solid var(--primary) !important;
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.cell--correct {
+    background-color: var(--correct-bg);
+    border-color: var(--correct-border);
+}
+
+.cell--correct .letra {
+    color: var(--correct-text);
+}
+
+.cell--wrong {
+    background-color: var(--wrong-bg);
+    border-color: var(--wrong-border);
+}
+
+.cell--wrong .letra {
+    color: var(--wrong-text);
+}
+
+/* Botões e controles */
+.controls {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn--primary {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn--primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn--secondary {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.btn--secondary:hover {
+    background: #bfdbfe;
+}
+
+.btn--ghost {
+    background: #ffffff;
+    border-color: var(--border-subtle);
+    color: var(--text-muted);
+}
+
+.btn--ghost:hover {
+    background: var(--bg-page);
+    color: var(--text-main);
+}
+
+.feedback-msg {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Painel de Dicas */
+.clues-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.clues-group {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.clues-group__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--primary-soft);
+}
+
+.clues-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.clue-item {
+    display: flex;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.clue-item:hover {
+    background: var(--bg-page);
+    color: var(--text-main);
+}
+
+.clue-item--active {
+    background: var(--primary-soft);
+    color: var(--primary-hover);
+    font-weight: 500;
+}
+
+.clue-item--solved {
+    text-decoration: line-through;
+    opacity: 0.65;
+}
+
+.clue-item__num {
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 24px;
+}
+
+@media (max-width: 1080px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .clues-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .clues-group {
+        flex: 1 1 300px;
+    }
+}
