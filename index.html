@@ -1,158 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/script.js"></script>
+    <title>Cruzadinha — Arquitetura Computacional</title>
     <link rel="stylesheet" href="./css/style.css">
-    <title>Cruzadinha Arquitetura Computacional</title>
+    <script src="./js/script.js" defer></script>
 </head>
+
 <body>
-    <header>
-        <h1>Cruzadinha — Arquitetura Computacional</h1>
-        <p id="intro">Leia as pistas e preencha a cruzadinha. Selecione uma célula e digite a letra.</p>
+    <header class="header">
+        <div class="header__content">
+            <span class="header__badge">Arquitetura de Computadores</span>
+            <h1 class="header__title">Palavras Cruzadas</h1>
+            <p class="header__subtitle">Clique em uma célula ou em uma dica para começar. Use as setas do teclado para
+                navegar.</p>
+        </div>
+        <div class="scoreboard">
+            <div class="scoreboard__item">
+                <span class="scoreboard__label">Palavras corretas</span>
+                <strong class="scoreboard__value"><span id="score-value">0</span> / 12</strong>
+            </div>
+        </div>
     </header>
 
-    <!-- Grid da cruzadinha -->
-    <main>
-        <section class="crossword-area">
-            <div class="crossword-grid" aria-label="Grade da cruzadinha" role="grid">
-                <!-- Grid baseado na imagem: dimensão 20x20 -->
-                <!-- MEMORIADEMASSA horizontal at row 2, col 3..16 -->
-                <!-- MICROCONTROLADOR horizontal at row 4, col 1..17 -->
-                <!-- REGISTRADORES vertical crossing MICROCONTROLADOR -->
-                <!-- RAM vertical crossing MEMORIADEMASSA/MICROCONTROLADOR area -->
-                <!-- UC/CPU/ULA cluster bottom-left -->
+    <main class="container">
+        <section class="board-card">
+            <div class="crossword-wrapper">
+                <div class="crossword-grid" id="crossword-grid" aria-label="Grade da cruzadinha" role="grid">
+                    <div class="cell" data-row="1" data-col="16" data-palavras="EEPROM:1"><span
+                            class="numero">2↓</span><span class="letra">E</span></div>
 
-                <!-- Row 1 unused for spacing -->
-                <!-- MEMORIADEMASSA -->
-                <div class="cell" style="grid-row:2;grid-column:3">M</div>
-                <div class="cell" style="grid-row:2;grid-column:4">E</div>
-                <div class="cell" style="grid-row:2;grid-column:5">M</div>
-                <div class="cell" style="grid-row:2;grid-column:6">O</div>
-                <div class="cell" style="grid-row:2;grid-column:7">R</div>
-                <div class="cell" style="grid-row:2;grid-column:8">I</div>
-                <div class="cell" style="grid-row:2;grid-column:9">A</div>
-                <div class="cell" style="grid-row:2;grid-column:10">D</div>
-                <div class="cell" style="grid-row:2;grid-column:11">E</div>
-                <div class="cell" style="grid-row:2;grid-column:12">M</div>
-                <div class="cell" style="grid-row:2;grid-column:13">A</div>
-                <div class="cell" style="grid-row:2;grid-column:14">S</div>
-                <div class="cell" style="grid-row:2;grid-column:15">S</div>
-                <div class="cell" style="grid-row:2;grid-column:16">A</div>
+                    <div class="cell" data-row="2" data-col="8" data-palavras="MEMORIADEMASSA:1"><span
+                            class="numero">1→</span><span class="letra">M</span></div>
+                    <div class="cell" data-row="2" data-col="9" data-palavras="MEMORIADEMASSA:2"><span
+                            class="letra">E</span></div>
+                    <div class="cell" data-row="2" data-col="10" data-palavras="MEMORIADEMASSA:3"><span
+                            class="letra">M</span></div>
+                    <div class="cell" data-row="2" data-col="11" data-palavras="MEMORIADEMASSA:4"><span
+                            class="letra">O</span></div>
+                    <div class="cell" data-row="2" data-col="12" data-palavras="MEMORIADEMASSA:5"><span
+                            class="letra">R</span></div>
+                    <div class="cell" data-row="2" data-col="13" data-palavras="MEMORIADEMASSA:6"><span
+                            class="letra">I</span></div>
+                    <div class="cell" data-row="2" data-col="14" data-palavras="MEMORIADEMASSA:7"><span
+                            class="letra">A</span></div>
+                    <div class="cell" data-row="2" data-col="15" data-palavras="MEMORIADEMASSA:8"><span
+                            class="letra">D</span></div>
+                    <div class="cell" data-row="2" data-col="16" data-palavras="MEMORIADEMASSA:9,EEPROM:2"><span
+                            class="letra">E</span></div>
+                    <div class="cell" data-row="2" data-col="17" data-palavras="MEMORIADEMASSA:10"><span
+                            class="letra">M</span></div>
+                    <div class="cell" data-row="2" data-col="18" data-palavras="MEMORIADEMASSA:11"><span
+                            class="letra">A</span></div>
+                    <div class="cell" data-row="2" data-col="19" data-palavras="MEMORIADEMASSA:12"><span
+                            class="letra">S</span></div>
+                    <div class="cell" data-row="2" data-col="20" data-palavras="MEMORIADEMASSA:13"><span
+                            class="letra">S</span></div>
+                    <div class="cell" data-row="2" data-col="21" data-palavras="MEMORIADEMASSA:14"><span
+                            class="letra">A</span></div>
 
-                <!-- MICROCONTROLADOR -->
-                <div class="cell" style="grid-row:4;grid-column:1">M</div>
-                <div class="cell" style="grid-row:4;grid-column:2">I</div>
-                <div class="cell" style="grid-row:4;grid-column:3">C</div>
-                <div class="cell" style="grid-row:4;grid-column:4">R</div>
-                <div class="cell" style="grid-row:4;grid-column:5">O</div>
-                <div class="cell" style="grid-row:4;grid-column:6">C</div>
-                <div class="cell" style="grid-row:4;grid-column:7">O</div>
-                <div class="cell" style="grid-row:4;grid-column:8">N</div>
-                <div class="cell" style="grid-row:4;grid-column:9">T</div>
-                <div class="cell" style="grid-row:4;grid-column:10">R</div>
-                <div class="cell" style="grid-row:4;grid-column:11">O</div>
-                <div class="cell" style="grid-row:4;grid-column:12">L</div>
-                <div class="cell" style="grid-row:4;grid-column:13">A</div>
-                <div class="cell" style="grid-row:4;grid-column:14">D</div>
-                <div class="cell" style="grid-row:4;grid-column:15">O</div>
+                    <div class="cell" data-row="3" data-col="16" data-palavras="EEPROM:3"><span class="letra">P</span>
+                    </div>
 
-                <!-- REGISTRADORES vertical starting at row5 col15 downward -->
-                <div class="cell" style="grid-row:5;grid-column:15">R</div>
-                <div class="cell" style="grid-row:6;grid-column:15">E</div>
-                <div class="cell" style="grid-row:7;grid-column:15">G</div>
-                <div class="cell" style="grid-row:8;grid-column:15">I</div>
-                <div class="cell" style="grid-row:9;grid-column:15">S</div>
-                <div class="cell" style="grid-row:10;grid-column:15">T</div>
-                <div class="cell" style="grid-row:11;grid-column:15">R</div>
-                <div class="cell" style="grid-row:12;grid-column:15">A</div>
-                <div class="cell" style="grid-row:13;grid-column:15">D</div>
-                <div class="cell" style="grid-row:14;grid-column:15">O</div>
-                <div class="cell" style="grid-row:15;grid-column:15">R</div>
-                <div class="cell" style="grid-row:16;grid-column:15">E</div>
-                <div class="cell" style="grid-row:17;grid-column:15">S</div>
+                    <div class="cell" data-row="4" data-col="1" data-palavras="MICROCONTROLADOR:1"><span
+                            class="numero">3→</span><span class="letra">M</span></div>
+                    <div class="cell" data-row="4" data-col="2" data-palavras="MICROCONTROLADOR:2"><span
+                            class="letra">I</span></div>
+                    <div class="cell" data-row="4" data-col="3" data-palavras="MICROCONTROLADOR:3"><span
+                            class="letra">C</span></div>
+                    <div class="cell" data-row="4" data-col="4" data-palavras="MICROCONTROLADOR:4"><span
+                            class="letra">R</span></div>
+                    <div class="cell" data-row="4" data-col="5" data-palavras="MICROCONTROLADOR:5"><span
+                            class="letra">O</span></div>
+                    <div class="cell" data-row="4" data-col="6" data-palavras="MICROCONTROLADOR:6"><span
+                            class="letra">C</span></div>
+                    <div class="cell" data-row="4" data-col="7" data-palavras="MICROCONTROLADOR:7"><span
+                            class="letra">O</span></div>
+                    <div class="cell" data-row="4" data-col="8" data-palavras="MICROCONTROLADOR:8"><span
+                            class="letra">N</span></div>
+                    <div class="cell" data-row="4" data-col="9" data-palavras="MICROCONTROLADOR:9"><span
+                            class="letra">T</span></div>
+                    <div class="cell" data-row="4" data-col="10" data-palavras="MICROCONTROLADOR:10"><span
+                            class="letra">R</span></div>
+                    <div class="cell" data-row="4" data-col="11" data-palavras="MICROCONTROLADOR:11"><span
+                            class="letra">O</span></div>
+                    <div class="cell" data-row="4" data-col="12" data-palavras="MICROCONTROLADOR:12"><span
+                            class="letra">L</span></div>
+                    <div class="cell" data-row="4" data-col="13" data-palavras="MICROCONTROLADOR:13"><span
+                            class="letra">A</span></div>
+                    <div class="cell" data-row="4" data-col="14" data-palavras="MICROCONTROLADOR:14,DMA:1"><span
+                            class="numero">4↓</span><span class="letra">D</span></div>
+                    <div class="cell" data-row="4" data-col="15" data-palavras="MICROCONTROLADOR:15"><span
+                            class="letra">O</span></div>
+                    <div class="cell" data-row="4" data-col="16" data-palavras="MICROCONTROLADOR:16,EEPROM:4"><span
+                            class="letra">R</span></div>
 
-                <!-- RAM vertical crossing MICROCONTROLADOR at row4 col5? Place RAM starting row4 col13? Adjust per image: place RAM vertical at col13 rows 4..6 -->
-                <div class="cell" style="grid-row:6;grid-column:13">R</div>
-                <div class="cell" style="grid-row:7;grid-column:13">A</div>
-                <div class="cell" style="grid-row:8;grid-column:13">M</div>
+                    <div class="cell" data-row="5" data-col="14" data-palavras="DMA:2"><span class="letra">M</span>
+                    </div>
+                    <div class="cell" data-row="5" data-col="16" data-palavras="EEPROM:5"><span class="letra">O</span>
+                    </div>
 
-                <!-- DMA vertical near MEMORIADEMASSA: place at col12 rows 3..5 to intersect MEM[3]--> 
-                <div class="cell" style="grid-row:3;grid-column:12">D</div>
-                <div class="cell" style="grid-row:4;grid-column:12">M</div>
-                <div class="cell" style="grid-row:5;grid-column:12">A</div>
+                    <div class="cell" data-row="6" data-col="13" data-palavras="REGISTRADORES:1,RAM:1"><span
+                            class="numero">6↓ 5→</span><span class="letra">R</span></div>
+                    <div class="cell" data-row="6" data-col="14" data-palavras="RAM:2,DMA:3"><span
+                            class="letra">A</span></div>
+                    <div class="cell" data-row="6" data-col="15" data-palavras="RAM:3"><span class="letra">M</span>
+                    </div>
+                    <div class="cell" data-row="6" data-col="16" data-palavras="EEPROM:6"><span class="letra">M</span>
+                    </div>
 
-                <!-- FLASH vertical under end of MEMORIADEMASSA: place col16 rows4..8 -->
-                <div class="cell" style="grid-row:3;grid-column:16">F</div>
-                <div class="cell" style="grid-row:4;grid-column:16">L</div>
-                <div class="cell" style="grid-row:5;grid-column:16">A</div>
-                <div class="cell" style="grid-row:6;grid-column:16">S</div>
-                <div class="cell" style="grid-row:7;grid-column:16">H</div>
+                    <div class="cell" data-row="7" data-col="13" data-palavras="REGISTRADORES:2"><span
+                            class="letra">E</span></div>
+                    <div class="cell" data-row="8" data-col="13" data-palavras="REGISTRADORES:3"><span
+                            class="letra">G</span></div>
+                    <div class="cell" data-row="9" data-col="13" data-palavras="REGISTRADORES:4"><span
+                            class="letra">I</span></div>
+                    <div class="cell" data-row="10" data-col="13" data-palavras="REGISTRADORES:5"><span
+                            class="letra">S</span></div>
+                    <div class="cell" data-row="11" data-col="13" data-palavras="REGISTRADORES:6"><span
+                            class="letra">T</span></div>
 
-                <!-- CACHE horizontal lower area row12 col9..13 -->
-                <div class="cell" style="grid-row:12;grid-column:9">C</div>
-                <div class="cell" style="grid-row:12;grid-column:10">A</div>
-                <div class="cell" style="grid-row:12;grid-column:11">C</div>
-                <div class="cell" style="grid-row:12;grid-column:12">H</div>
-                <div class="cell" style="grid-row:12;grid-column:13">E</div>
+                    <div class="cell" data-row="12" data-col="13" data-palavras="REGISTRADORES:7,ROM:1"><span
+                            class="numero">12→</span><span class="letra">R</span></div>
+                    <div class="cell" data-row="12" data-col="14" data-palavras="ROM:2"><span class="letra">O</span>
+                    </div>
+                    <div class="cell" data-row="12" data-col="15" data-palavras="ROM:3"><span class="letra">M</span>
+                    </div>
 
-                <!-- EEPROM horizontal row13 col11..15 -> E E P R O -->
-                <div class="cell" style="grid-row:13;grid-column:11">E</div>
-                <div class="cell" style="grid-row:13;grid-column:12">E</div>
-                <div class="cell" style="grid-row:13;grid-column:13">P</div>
-                <div class="cell" style="grid-row:13;grid-column:14">R</div>
-                <div class="cell" style="grid-row:13;grid-column:15">O</div>
+                    <div class="cell" data-row="13" data-col="13" data-palavras="REGISTRADORES:8"><span
+                            class="letra">A</span></div>
+                    <div class="cell" data-row="14" data-col="13" data-palavras="REGISTRADORES:9"><span
+                            class="letra">D</span></div>
 
-                <!-- ROM horizontal row13 col14..16 overlapping EEPROM R at col14 -->
-                <div class="cell" style="grid-row:13;grid-column:14">R</div>
-                <div class="cell" style="grid-row:13;grid-column:15">O</div>
-                <div class="cell" style="grid-row:13;grid-column:16">M</div>
+                    <div class="cell" data-row="14" data-col="8" data-palavras="UC:1"><span
+                            class="numero">11→</span><span class="letra">U</span></div>
+                    <div class="cell" data-row="14" data-col="9" data-palavras="UC:2,CPU:1"><span
+                            class="numero">10↓</span><span class="letra">C</span></div>
 
-                <!-- UC/CPU/ULA cluster bottom-left -->
-                <div class="cell" style="grid-row:15;grid-column:3">U</div>
-                <div class="cell" style="grid-row:15;grid-column:4">C</div>
-                <div class="cell" style="grid-row:14;grid-column:4">P</div>
-                <div class="cell" style="grid-row:15;grid-column:5">U</div>
+                    <div class="cell" data-row="15" data-col="9" data-palavras="CPU:2"><span class="letra">P</span>
+                    </div>
+                    <div class="cell" data-row="15" data-col="10" data-palavras="FLASH:1"><span
+                            class="numero">8↓</span><span class="letra">F</span></div>
+                    <div class="cell" data-row="15" data-col="13" data-palavras="REGISTRADORES:10"><span
+                            class="letra">O</span></div>
 
-                <div class="cell" style="grid-row:16;grid-column:4">U</div>
-                <div class="cell" style="grid-row:16;grid-column:5">L</div>
-                <div class="cell" style="grid-row:17;grid-column:5">A</div>
+                    <div class="cell" data-row="16" data-col="9" data-palavras="CPU:3,ULA:1"><span
+                            class="numero">9→</span><span class="letra">U</span></div>
+                    <div class="cell" data-row="16" data-col="10" data-palavras="ULA:2,FLASH:2"><span
+                            class="letra">L</span></div>
+                    <div class="cell" data-row="16" data-col="11" data-palavras="ULA:3"><span class="letra">A</span>
+                    </div>
+                    <div class="cell" data-row="16" data-col="13" data-palavras="REGISTRADORES:11"><span
+                            class="letra">R</span></div>
 
-                <!-- small CACHE connection letters under ULA -->
-                <div class="cell" style="grid-row:17;grid-column:4">C</div>
-                <div class="cell" style="grid-row:17;grid-column:6">H</div>
+                    <div class="cell" data-row="17" data-col="9" data-palavras="CACHE:1"><span
+                            class="numero">7→</span><span class="letra">C</span></div>
+                    <div class="cell" data-row="17" data-col="10" data-palavras="CACHE:2,FLASH:3"><span
+                            class="letra">A</span></div>
+                    <div class="cell" data-row="17" data-col="11" data-palavras="CACHE:3"><span class="letra">C</span>
+                    </div>
+                    <div class="cell" data-row="17" data-col="12" data-palavras="CACHE:4"><span class="letra">H</span>
+                    </div>
+                    <div class="cell" data-row="17" data-col="13" data-palavras="CACHE:5,REGISTRADORES:12"><span
+                            class="letra">E</span></div>
 
+                    <div class="cell" data-row="18" data-col="10" data-palavras="FLASH:4"><span class="letra">S</span>
+                    </div>
+                    <div class="cell" data-row="18" data-col="13" data-palavras="REGISTRADORES:13"><span
+                            class="letra">S</span></div>
+
+                    <div class="cell" data-row="19" data-col="10" data-palavras="FLASH:5"><span class="letra">H</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Controles -->
             <div class="controls">
-                <button id="check-btn" type="button">Conferir</button>
-                <button id="reset-btn" type="button">Reiniciar</button>
-                <div id="score">Acertos: <span id="score-value">0</span></div>
+                <button id="check-btn" class="btn btn--primary" type="button">Conferir Respostas</button>
+                <button id="reveal-btn" class="btn btn--secondary" type="button">Revelar Tudo</button>
+                <button id="reset-btn" class="btn btn--ghost" type="button">Reiniciar</button>
+                <span id="feedback-msg" class="feedback-msg" aria-live="polite"></span>
             </div>
         </section>
 
-        <!-- Pistas: horizontais e verticais -->
-        <aside class="pistas">
-            <section class="pistas-horiz">
-                <h2>Horizontais</h2>
-                <ul>
-                    <li id="h1"><strong>1.</strong> Dica horizontal 1</li>
-                    <li id="h2"><strong>2.</strong> Dica horizontal 2</li>
-                    <li id="h3"><strong>3.</strong> Dica horizontal 3</li>
+        <aside class="clues-panel">
+            <div class="clues-group">
+                <h2 class="clues-group__title">Horizontais (→)</h2>
+                <ul class="clues-list" id="clues-horiz">
+                    <li class="clue-item" data-palavra="MEMORIADEMASSA" data-dir="H">
+                        <span class="clue-item__num">1.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="MICROCONTROLADOR" data-dir="H">
+                        <span class="clue-item__num">3.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="RAM" data-dir="H">
+                        <span class="clue-item__num">5.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="CACHE" data-dir="H">
+                        <span class="clue-item__num">7.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="ULA" data-dir="H">
+                        <span class="clue-item__num">9.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="UC" data-dir="H">
+                        <span class="clue-item__num">11.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="ROM" data-dir="H">
+                        <span class="clue-item__num">12.</span>
+                        <span></span>
+                    </li>
                 </ul>
-            </section>
-            <section class="pistas-vert">
-                <h2>Verticais</h2>
-                <ul>
-                    <li id="v1"><strong>1.</strong> Dica vertical 1</li>
-                    <li id="v2"><strong>2.</strong> Dica vertical 2</li>
-                    <li id="v3"><strong>3.</strong> Dica vertical 3</li>
-                    <li id="v4"><strong>4.</strong> Dica vertical 4</li>
+            </div>
+
+            <div class="clues-group">
+                <h2 class="clues-group__title">Verticais (↓)</h2>
+                <ul class="clues-list" id="clues-vert">
+                    <li class="clue-item" data-palavra="EEPROM" data-dir="V">
+                        <span class="clue-item__num">2.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="DMA" data-dir="V">
+                        <span class="clue-item__num">4.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="REGISTRADORES" data-dir="V">
+                        <span class="clue-item__num">6.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="FLASH" data-dir="V">
+                        <span class="clue-item__num">8.</span>
+                        <span></span>
+                    </li>
+                    <li class="clue-item" data-palavra="CPU" data-dir="V">
+                        <span class="clue-item__num">10.</span>
+                        <span></span>
+                    </li>
                 </ul>
-            </section>
+            </div>
         </aside>
     </main>
 </body>
+
 </html>
